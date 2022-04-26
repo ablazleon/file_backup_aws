@@ -11,7 +11,7 @@ resource "aws_instance" "server_tf" {
           sudo apt-get update
           EOF
   tags = {
-    Name = "server"
+    Name = "server_tf"
   }
 }
 
