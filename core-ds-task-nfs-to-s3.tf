@@ -1,3 +1,4 @@
+
 # Se crea un rol que permita el acceso de datasync al bucket
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role
 # https://docs.aws.amazon.com/datasync/latest/userguide/using-identity-based-policies.html
@@ -91,5 +92,6 @@ resource "aws_datasync_task" "task" {
   depends_on = [aws_datasync_location_s3.core_bucket_loc_tf, aws_datasync_location_nfs.nfs_loc_tf]
 
 }
+
 
 

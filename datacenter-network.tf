@@ -2,7 +2,7 @@
 
 #Create key-pair for logging into EC2
 resource "aws_key_pair" "server-key" {
-  key_name   = "server-key"
+  key_name   = "id_rsa"
   public_key = file("~/.ssh/id_rsa.pub")
 }
 
