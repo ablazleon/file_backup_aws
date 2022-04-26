@@ -1,26 +1,3 @@
-# Se crea una conexión con el agente
-resource "aws_datasync_agent" "datasync_agent" {
-  ip_address = aws_instance.ds-agent_tf.public_ip
-  name       = "datasync_agent"
-  # Depende que se cree la conexión con el agente de que se haya creado la vm agente
-  depends_on = [aws_instance.ds-agent_tf]
-}
-
-# Se crea un task de migración para lo que es necesario una lcoalización nfs y otra s3
-
-resource "aws_s3_bucket" "core_bucket_tf" {
-  bucket = "core-bucket-tf"
-
-  tags = {
-    Name = "core-bucket-tf"
-  }
-}
-
-resource "aws_s3_bucket_acl" "core_bucket_acl_tf" {
-  bucket = aws_s3_bucket.core_bucket_tf.id
-  acl    = "private"
-}
-
 # Se crea un rol que permita el acceso de datasync al bucket
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role
 # https://docs.aws.amazon.com/datasync/latest/userguide/using-identity-based-policies.html
@@ -108,13 +85,6 @@ resource "aws_datasync_task" "task" {
     bytes_per_second = -1
   }
 
-  depends_on = [aws_instance.server_tf, aws_datasync_location_nfs.nfs_loc_tf]
+  depends_on = [aws_datasync_location_s3.core_bucket_loc_tf, aws_datasync_location_nfs.nfs_loc_tf]
 
 }
-
-
-
-
-
-
-
