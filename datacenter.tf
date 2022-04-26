@@ -53,10 +53,4 @@ resource "aws_instance" "sg-agent_tf" {
 
 }
 
-resource "aws_ebs_volume" "v_sg_agent_tf" {
-  availability_zone = aws_subnet.subnet.availability_zone
-  size              = 150
-
-  depends_on = [aws_subnet.subnet]
-}
 

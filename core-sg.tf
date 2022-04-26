@@ -16,6 +16,7 @@ resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
   gateway_arn  = aws_storagegateway_gateway.sg_tf.arn
   location_arn = aws_s3_bucket.core_bucket_tf.arn
   role_arn     = aws_iam_role.sg_s3_role.arn
+  file_share_name = "/migration/"
 
   timeouts {
     create = "1m"
@@ -62,6 +63,14 @@ resource "aws_iam_role" "sg_s3_role" {
   depends_on = [aws_s3_bucket.core_bucket_tf]
 }
 
+
+resource "aws_ebs_volume" "v_sg_agent_tf" {
+  availability_zone = aws_subnet.subnet.availability_zone
+  size              = 150
+
+  depends_on = [aws_subnet.subnet]
+}
+
 resource "aws_volume_attachment" "ebs_att_tf" {
   device_name = "/dev/sdb"
   volume_id   = aws_ebs_volume.v_sg_agent_tf.id
@@ -71,9 +80,12 @@ resource "aws_volume_attachment" "ebs_att_tf" {
 
 }
 
+/*
 data "aws_storagegateway_local_disk" "ld_sg_tf" {
-  # disk_node   = data.aws_volume_attachment.ebs_att_tf.device_name
+  depends_on = [aws_volume_attachment.ebs_att_tf ]
+  disk_node   = data.aws_volume_attachment.ebs_att_tf.device_name
   gateway_arn = aws_storagegateway_gateway.sg_tf.arn
+
 
 }
 
@@ -83,4 +95,4 @@ resource "aws_storagegateway_cache" "sg_c_tf" {
 
   depends_on = [ aws_storagegateway_gateway.sg_tf]
 }
-
+*/
