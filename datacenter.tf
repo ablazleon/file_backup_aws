@@ -1,4 +1,9 @@
 
+# Se monta un servidor nfs
+# https://www.tecmint.com/install-nfs-server-on-ubuntu/
+
+# Modificar el exports, con el rango de ip pirvada sacada de la subnet
+# https://linuxize.com/post/create-a-file-in-linux/#:~:text=To%20create%20a%20new%20file%20run%20the%20cat%20command%20followed,D%20to%20save%20the%20files.
 resource "aws_instance" "server_tf" {
   ami                         = "ami-0c6ebbd55ab05f070"
   instance_type               = "t2.micro"
@@ -8,7 +13,14 @@ resource "aws_instance" "server_tf" {
   subnet_id                   = aws_subnet.subnet.id
   user_data                   = <<EOF
           #! /bin/bash
-          sudo apt-get update
+          sudo apt update
+          sudo apt install nfs-kernel-server
+          sudo mkdir -p /home/ubuntu/share_local_nfs
+          sudo chown -R nobody:nogroup /home/ubuntu/share_local_nfs
+          sudo chmod 777 /home/ubuntu/share_local_nfs
+          sudo echo "/home/ubuntu/share_local_nfs  10.0.0.0/24(rw,sync,no_subtree_check)"
+          sudo exportfs -a
+          sudo systemctl restart nfs-kernel-server
           EOF
   tags = {
     Name = "server_tf"

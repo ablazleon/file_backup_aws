@@ -34,6 +34,10 @@ resource "aws_datasync_location_s3" "core_bucket_loc_tf" {
   depends_on = [aws_datasync_agent.datasync_agent, aws_iam_role.datasync_to_s3_role]
 }
 
+# Se referencia al arn del bucket
+# https://www.terraform.io/language/expressions/references
+
+
 resource "aws_iam_role" "datasync_to_s3_role" {
   name               = "datasync_to_s3_role"
   assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy.json # (not shown)
@@ -83,49 +87,19 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
   }
 }
 
-# Se referencia al arn del bucket
-# https://www.terraform.io/language/expressions/references
+# Se liga con el nfs montado
+resource "aws_datasync_location_nfs" "nfs_loc_tf" {
+  server_hostname = aws_instance.server_tf.public_ip
+  subdirectory    = "/home/ubuntu/share_local_nfs"
 
+  on_prem_config {
+    agent_arns = [aws_datasync_agent.datasync_agent.arn]
+  }
 
-/*
-resource "aws_iam_role" "datasyncToS3Role" {
-  name = "datasync_to_s3_role"
-
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
-  assume_role_policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Action" : [
-          "s3:GetBucketLocation",
-          "s3:ListBucket",
-          "s3:ListBucketMultipartUploads"
-        ],
-        "Effect" : "Allow",
-        "Resource": "${aws_s3_bucket.core_bucket_tf.arn}"
-      },
-      {
-        "Action" : [
-          "s3:AbortMultipartUpload",
-          "s3:DeleteObject",
-          "s3:GetObject",
-          "s3:ListMultipartUploadParts",
-          "s3:GetObjectTagging",
-          "s3:PutObjectTagging",
-          "s3:PutObject"
-        ],
-        "Effect" : "Allow",
-        "Resource": "${aws_s3_bucket.core_bucket_tf.arn}/*"
-      }
-    ]
-  })
-
-
-  depends_on = [aws_s3_bucket.core_bucket_tf]
+  depends_on = [aws_datasync_agent.datasync_agent, aws_instance.server_tf]
 }
 
-  */
+
 
 
 
