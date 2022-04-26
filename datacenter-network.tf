@@ -3,7 +3,7 @@
 #Create key-pair for logging into EC2 in us-east-1
 resource "aws_key_pair" "server-key" {
   key_name   = "server-key"
-  public_key = file("./server-key.pem.pub")
+  public_key = file("~/.ssh/id_rsa.pub")
 }
 
 #Create VPC

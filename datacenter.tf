@@ -6,17 +6,10 @@ resource "aws_instance" "server" {
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.subnet.id
-  provisioner "remote-exec" {
-    inline = [
-      # Instalar
-    ]
-    connection {
-      type        = "ssh"
-      user        = "ec2-user"
-      private_key = file("./server-key.pem")
-      host        = self.public_ip
-    }
-  }
+  user_data = <<EOF
+          #! /bin/bash
+          sudo apt-get update
+          EOF
   tags = {
     Name = "server"
   }
