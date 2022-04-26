@@ -68,7 +68,7 @@ data "aws_iam_policy_document" "instance_assume_role_policy" {
 # Se liga con el nfs montado
 resource "aws_datasync_location_nfs" "nfs_loc_tf" {
   server_hostname = aws_instance.server_tf.private_ip
-  subdirectory    = "/home/ubuntu/share_local_nfs"
+  subdirectory    = "/home/ubuntu/share_local_nfs_tf"
 
   on_prem_config {
     agent_arns = [aws_datasync_agent.datasync_agent.arn]

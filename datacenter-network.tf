@@ -8,7 +8,7 @@ resource "aws_key_pair" "server-key" {
 
 #Create VPC
 resource "aws_vpc" "vpc" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = "10.1.0.0/24"
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
@@ -55,7 +55,7 @@ data "aws_availability_zones" "azs" {
 resource "aws_subnet" "subnet" {
   availability_zone = element(data.aws_availability_zones.azs.names, 0)
   vpc_id            = aws_vpc.vpc.id
-  cidr_block        = "10.0.0.0/24"
+  cidr_block        = "10.1.0.0/24"
   tags = {
     Name = "sb_tf"
   }

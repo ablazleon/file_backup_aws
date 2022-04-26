@@ -17,7 +17,7 @@ resource "aws_instance" "server_tf" {
           sudo apt install nfs-kernel-server
           sudo mkdir -p /home/ubuntu/share_local_nfs
           sudo chown -R nobody:nogroup /home/ubuntu/share_local_nfs
-          sudo chmod 777 /home/ubuntu/share_local_nfs
+          sudo chmod 777 /home/ubuntu/share_local_nfs_tf
           sudo echo "/home/ubuntu/share_local_nfs  10.0.0.0/24(rw,sync,no_subtree_check)" > /etc/exports
           sudo exportfs -a
           sudo systemctl restart nfs-kernel-server
