@@ -86,7 +86,7 @@ resource "aws_datasync_task" "task" {
   }
 
   timeouts {
-    create = "1m"
+    create = "2m"
   }
   depends_on = [aws_datasync_location_s3.core_bucket_loc_tf, aws_datasync_location_nfs.nfs_loc_tf]
 

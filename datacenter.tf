@@ -5,7 +5,7 @@
 # Modificar el exports, con el rango de ip pirvada sacada de la subnet
 # https://linuxize.com/post/create-a-file-in-linux/#:~:text=To%20create%20a%20new%20file%20run%20the%20cat%20command%20followed,D%20to%20save%20the%20files.
 resource "aws_instance" "server_tf" {
-  ami                         = "ami-0c6ebbd55ab05f070"
+  ami                         = "ami-06ad2ef8cd7012912"
   instance_type               = "t2.micro"
   key_name                    = aws_key_pair.server-key.key_name
   associate_public_ip_address = true
