@@ -12,18 +12,18 @@ resource "aws_vpc" "vpc" {
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
-    Name = "datacenter-vpc"
+    Name = "datacenter-vpc-tf"
   }
 
 }
 
 #Create IGW
-resource "aws_internet_gateway" "igw" {
+resource "aws_internet_gateway" "igw-tf" {
   vpc_id = aws_vpc.vpc.id
 }
 
 #Get main route table to modify
-data "aws_route_table" "main_route_table" {
+data "aws_route_table" "main_route_table-tf" {
   filter {
     name   = "association.main"
     values = ["true"]
@@ -36,13 +36,13 @@ data "aws_route_table" "main_route_table" {
 
 #Create route table
 resource "aws_default_route_table" "internet_route" {
-  default_route_table_id = data.aws_route_table.main_route_table.id
+  default_route_table_id = data.aws_route_table.main_route_table-tf.id
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
+    gateway_id = aws_internet_gateway.igw-tf.id
   }
   tags = {
-    Name = "Datacenter-RouteTable"
+    Name = "Datacenter-RouteTable-tf"
   }
 }
 
@@ -56,6 +56,9 @@ resource "aws_subnet" "subnet" {
   availability_zone = element(data.aws_availability_zones.azs.names, 0)
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.0.0/24"
+  tags = {
+    Name = "sb_tf"
+  }
 }
 
 
