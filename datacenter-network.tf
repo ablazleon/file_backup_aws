@@ -59,12 +59,11 @@ resource "aws_subnet" "subnet" {
 }
 
 
-#Create SG for allowing TCP/80 & TCP/22
+#Create SG for allowing TCP/80 & TCP/22, y 2049 nfs
 resource "aws_security_group" "sg" {
   name        = "sg"
   description = "Allow TCP/80 & TCP/22"
   vpc_id      = aws_vpc.vpc.id
-  /*
   ingress {
     description = "Allow SSH traffic"
     from_port   = 22
@@ -79,11 +78,10 @@ resource "aws_security_group" "sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  */
   ingress {
-    description = "allow traffic from everywhere"
-    from_port   = -1
-    to_port     = -1
+    description = "allow traffic from NFS"
+    from_port   = 2049
+    to_port     = 2049
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -95,7 +93,7 @@ resource "aws_security_group" "sg" {
   }
 }
 
-output "Webserver-Public-IP" {
+output "Server-Public-IP" {
   value = aws_instance.server_tf.public_ip
 }
 
