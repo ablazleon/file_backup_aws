@@ -11,7 +11,7 @@ resource "aws_instance" "server_tf" {
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.subnet.id
-  user_data                   = <<EOF
+  user_data                   = <<-EOF
           #!/bin/bash
           sudo apt update
           sudo apt install nfs-kernel-server
