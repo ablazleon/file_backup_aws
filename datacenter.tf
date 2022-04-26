@@ -12,7 +12,7 @@ resource "aws_instance" "server_tf" {
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.subnet.id
   user_data                   = <<EOF
-          #! /bin/bash
+          #!/bin/bash
           sudo apt update
           sudo apt install nfs-kernel-server
           sudo mkdir -p /home/ubuntu/share_local_nfs
