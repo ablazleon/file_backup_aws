@@ -14,7 +14,7 @@ resource "aws_instance" "server_tf" {
   user_data                   = <<-EOF
           #!/bin/bash
           sudo apt update
-          sudo apt install nfs-kernel-server
+          sudo apt install nfs-kernel-server -y
           sudo mkdir -p /home/ubuntu/share_local_nfs_tf
           sudo chown -R nobody:nogroup /home/ubuntu/share_local_nfs_tf
           sudo chmod 777 /home/ubuntu/share_local_nfs_tf
