@@ -4,6 +4,10 @@ resource "aws_storagegateway_gateway" "sg_tf" {
   gateway_timezone   = "GMT+1:00"
   gateway_type       = "FILE_S3"
 
+  timeouts {
+    create = "1m"
+  }
+
   depends_on = [aws_instance.sg-agent_tf]
 }
 
@@ -12,6 +16,10 @@ resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
   gateway_arn  = aws_storagegateway_gateway.sg_tf.arn
   location_arn = aws_s3_bucket.core_bucket_tf.arn
   role_arn     = aws_iam_role.sg_s3_role.arn
+
+  timeouts {
+    create = "1m"
+  }
 
   depends_on = [aws_storagegateway_gateway.sg_tf, aws_iam_role.sg_s3_role]
 }
@@ -54,18 +62,25 @@ resource "aws_iam_role" "sg_s3_role" {
   depends_on = [aws_s3_bucket.core_bucket_tf]
 }
 
-/*
+resource "aws_volume_attachment" "ebs_att_tf" {
+  device_name = "/dev/sdb"
+  volume_id   = aws_ebs_volume.v_sg_agent_tf.id
+  instance_id = aws_instance.sg-agent_tf.id
+
+  depends_on = [aws_ebs_volume.v_sg_agent_tf, aws_instance.sg-agent_tf]
+
+}
 
 data "aws_storagegateway_local_disk" "ld_sg_tf" {
-  disk_node   = data.aws_volume_attachment.
+  # disk_node   = data.aws_volume_attachment.ebs_att_tf.device_name
   gateway_arn = aws_storagegateway_gateway.sg_tf.arn
+
 }
 
 resource "aws_storagegateway_cache" "sg_c_tf" {
   disk_id     = data.aws_storagegateway_local_disk.ld_sg_tf.disk_id
   gateway_arn = aws_storagegateway_gateway.sg_tf.arn
 
-  depends_on = [aws_storagegateway_local_disk.ld_sg_tf, aws_storagegateway_gateway.sg_tf]
+  depends_on = [ aws_storagegateway_gateway.sg_tf]
 }
 
-*/

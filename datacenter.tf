@@ -53,15 +53,6 @@ resource "aws_instance" "sg-agent_tf" {
 
 }
 
-resource "aws_volume_attachment" "ebs_att_tf" {
-  device_name = "/dev/sdb"
-  volume_id   = aws_ebs_volume.v_sg_agent_tf.id
-  instance_id = aws_instance.sg-agent_tf.id
-
-  depends_on = [aws_ebs_volume.v_sg_agent_tf, aws_instance.sg-agent_tf]
-
-}
-
 resource "aws_ebs_volume" "v_sg_agent_tf" {
   availability_zone = aws_subnet.subnet.availability_zone
   size              = 150
