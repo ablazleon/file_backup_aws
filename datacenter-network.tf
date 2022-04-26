@@ -1,9 +1,9 @@
 #https://github.com/linuxacademy/content-hashicorp-certified-terraform-associate-foundations/blob/master/section3-hol2/setup.tf
 
 #Create key-pair for logging into EC2 in us-east-1
-resource "aws_key_pair" "webserver-key" {
-  key_name   = "webserver-key"
-  public_key = file("./mykp.pem")
+resource "aws_key_pair" "server-key" {
+  key_name   = "server-key"
+  public_key = file("./server-key.pem.pub")
 }
 
 #Create VPC

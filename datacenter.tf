@@ -2,7 +2,7 @@
 resource "aws_instance" "server" {
   ami           = "ami-0c6ebbd55ab05f070"
   instance_type = "t2.micro"
-  key_name                    = aws_key_pair.webserver-key.key_name
+  key_name                    = aws_key_pair.server-key.key_name
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.subnet.id
@@ -13,7 +13,7 @@ resource "aws_instance" "server" {
     connection {
       type        = "ssh"
       user        = "ec2-user"
-      private_key = file("./mykp.pem")
+      private_key = file("./server-key.pem")
       host        = self.public_ip
     }
   }

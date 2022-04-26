@@ -36,4 +36,5 @@ terraform.rc
 /shelf/
 /workspace.xml
 
-mykp.pem
+server-key.pem
+server-key.pem.pub
