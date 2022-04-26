@@ -15,13 +15,13 @@ resource "aws_instance" "server_tf" {
           #!/bin/bash
           sudo apt update
           sudo apt install nfs-kernel-server
-          sudo mkdir -p /home/ubuntu/share_local_nfs
-          sudo chown -R nobody:nogroup /home/ubuntu/share_local_nfs
+          sudo mkdir -p /home/ubuntu/share_local_nfs_tf
+          sudo chown -R nobody:nogroup /home/ubuntu/share_local_nfs_tf
           sudo chmod 777 /home/ubuntu/share_local_nfs_tf
-          sudo echo "/home/ubuntu/share_local_nfs  10.0.0.0/24(rw,sync,no_subtree_check)" > /etc/exports
+          sudo echo "/home/ubuntu/share_local_nfs_tf  10.1.0.0/24(rw,sync,no_subtree_check)" > /etc/exports
           sudo exportfs -a
           sudo systemctl restart nfs-kernel-server
-          sudo echo "hola" > /home/ubuntu/share_local_nfs/ejemplo
+          sudo echo "hola" > /home/ubuntu/share_local_nfs_tf/ejemplo
           EOF
   tags = {
     Name = "server_tf"
