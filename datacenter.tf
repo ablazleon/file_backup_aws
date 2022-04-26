@@ -39,3 +39,33 @@ resource "aws_instance" "ds-agent_tf" {
     Name = "ds-agent_tf"
   }
 }
+
+resource "aws_instance" "sg-agent_tf" {
+  ami                         = "ami-008ded4ccf064a9fa"
+  instance_type               = "m5.large"
+  key_name                    = aws_key_pair.server-key.key_name
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.sg.id]
+  subnet_id                   = aws_subnet.subnet.id
+  tags = {
+    Name = "sg-agent_tf"
+  }
+
+}
+
+resource "aws_volume_attachment" "ebs_att_tf" {
+  device_name = "/dev/sdb"
+  volume_id   = aws_ebs_volume.v_sg_agent_tf.id
+  instance_id = aws_instance.sg-agent_tf.id
+
+  depends_on = [aws_ebs_volume.v_sg_agent_tf, aws_instance.sg-agent_tf]
+
+}
+
+resource "aws_ebs_volume" "v_sg_agent_tf" {
+  availability_zone = aws_subnet.subnet.availability_zone
+  size              = 150
+
+  depends_on = [aws_subnet.subnet]
+}
+

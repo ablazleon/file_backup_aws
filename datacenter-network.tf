@@ -90,9 +90,9 @@ resource "aws_security_group" "sg" {
   }
   ingress {
     description = "allow all traffic"
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
@@ -109,4 +109,8 @@ output "Server-Public-IP" {
 
 output "DS-Agent-Public-IP" {
   value = aws_instance.ds-agent_tf.public_ip
+}
+
+output "SG-Agent-Public-IP" {
+  value = aws_instance.sg-agent_tf.public_ip
 }
