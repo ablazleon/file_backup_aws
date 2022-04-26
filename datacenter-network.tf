@@ -1,6 +1,6 @@
 #https://github.com/linuxacademy/content-hashicorp-certified-terraform-associate-foundations/blob/master/section3-hol2/setup.tf
 
-#Create key-pair for logging into EC2 in us-east-1
+#Create key-pair for logging into EC2
 resource "aws_key_pair" "server-key" {
   key_name   = "server-key"
   public_key = file("~/.ssh/id_rsa.pub")
@@ -17,7 +17,7 @@ resource "aws_vpc" "vpc" {
 
 }
 
-#Create IGW in us-east-1
+#Create IGW
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.vpc.id
 }
