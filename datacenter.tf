@@ -19,9 +19,9 @@ resource "aws_instance" "server_tf" {
           sudo chown -R nobody:nogroup /home/ubuntu/share_local_nfs_tf
           sudo chmod 777 /home/ubuntu/share_local_nfs_tf
           sudo echo "/home/ubuntu/share_local_nfs_tf  10.1.0.0/24(rw,sync,no_subtree_check)" > /etc/exports
+          sudo echo "hola" > /home/ubuntu/share_local_nfs_tf/ejemplo
           sudo exportfs -a
           sudo systemctl restart nfs-kernel-server
-          sudo echo "hola" > /home/ubuntu/share_local_nfs_tf/ejemplo
           EOF
   tags = {
     Name = "server_tf"
