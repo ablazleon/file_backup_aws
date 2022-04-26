@@ -99,6 +99,19 @@ resource "aws_datasync_location_nfs" "nfs_loc_tf" {
   depends_on = [aws_datasync_agent.datasync_agent, aws_instance.server_tf]
 }
 
+resource "aws_datasync_task" "task" {
+  destination_location_arn = aws_datasync_location_s3.core_bucket_loc_tf.arn
+  name                     = "task"
+  source_location_arn      = aws_datasync_location_nfs.nfs_loc_tf.arn
+
+  options {
+    bytes_per_second = -1
+  }
+
+  depends_on = [aws_instance.server_tf, aws_datasync_location_nfs.nfs_loc_tf]
+
+}
+
 
 
 
