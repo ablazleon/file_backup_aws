@@ -51,7 +51,7 @@ resource "aws_iam_role" "datasync_to_s3_role" {
             "s3:ListBucketMultipartUploads"
           ],
           "Effect" : "Allow",
-          "Resource": "${aws_s3_bucket.core_bucket_tf.arn}"
+          "Resource" : "${aws_s3_bucket.core_bucket_tf.arn}"
         },
         {
           "Action" : [
@@ -64,12 +64,12 @@ resource "aws_iam_role" "datasync_to_s3_role" {
             "s3:PutObject"
           ],
           "Effect" : "Allow",
-          "Resource": "${aws_s3_bucket.core_bucket_tf.arn}/*"
+          "Resource" : "${aws_s3_bucket.core_bucket_tf.arn}/*"
         }
       ]
     })
   }
-
+  depends_on = [aws_s3_bucket.core_bucket_tf]
 }
 
 data "aws_iam_policy_document" "instance_assume_role_policy" {
