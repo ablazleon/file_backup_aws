@@ -64,6 +64,7 @@ resource "aws_security_group" "sg" {
   name        = "sg"
   description = "Allow TCP/80 & TCP/22"
   vpc_id      = aws_vpc.vpc.id
+  /*
   ingress {
     description = "Allow SSH traffic"
     from_port   = 22
@@ -78,6 +79,14 @@ resource "aws_security_group" "sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  */
+  ingress {
+    description = "allow traffic from everywhere"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
     from_port   = 0
     to_port     = 0
@@ -87,5 +96,9 @@ resource "aws_security_group" "sg" {
 }
 
 output "Webserver-Public-IP" {
-  value = aws_instance.server.public_ip
+  value = aws_instance.server_tf.public_ip
+}
+
+output "DS-Agent-Public-IP" {
+  value = aws_instance.ds-agent_tf.public_ip
 }
