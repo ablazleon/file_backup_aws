@@ -82,6 +82,11 @@ resource "aws_datasync_task" "task" {
   name                     = "task"
   source_location_arn      = aws_datasync_location_nfs.nfs_loc_tf.arn
 
+  # Corre cada 5 min
+  schedule {
+    schedule_expression = "cron(0/5 * * * * *)"
+  }
+
   options {
     bytes_per_second = -1
   }
