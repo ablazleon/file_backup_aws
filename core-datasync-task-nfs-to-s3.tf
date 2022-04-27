@@ -84,7 +84,7 @@ resource "aws_datasync_task" "task" {
 
   # Corre cada hora
   schedule {
-    schedule_expression = "cron(0/1 * ? * * *)"
+    schedule_expression = "cron(0 1 ? * * *)"
   }
 
   options {
