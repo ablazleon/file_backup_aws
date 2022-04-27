@@ -3,12 +3,12 @@ resource "aws_storagegateway_gateway" "sg_tf" {
   gateway_name       = "sg_tf"
   gateway_timezone   = "GMT+1:00"
   gateway_type       = "FILE_S3"
-
+  cloudwatch_log_group_arn = aws_cloudwatch_log_group.log_group_sg_tf.arn
   timeouts {
     create = "4m"
   }
 
-  depends_on = [aws_instance.sg-agent_tf]
+  depends_on = [aws_instance.sg-agent_tf, aws_cloudwatch_log_group.log_group_sg_tf]
 }
 
 resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
@@ -83,6 +83,11 @@ resource "aws_volume_attachment" "ebs_att_tf" {
 
   depends_on = [aws_ebs_volume.v_sg_agent_tf, aws_instance.sg-agent_tf]
 
+}
+
+#https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
+resource "aws_cloudwatch_log_group" "log_group_sg_tf" {
+  name = "log_group_sg_tf"
 }
 
 /*
