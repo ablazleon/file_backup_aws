@@ -9,7 +9,7 @@ resource "aws_datasync_location_s3" "core_bucket_loc_tf" {
   s3_config {
     bucket_access_role_arn = aws_iam_role.datasync_to_s3_role.arn
   }
-  depends_on = [aws_datasync_agent.datasync_agent, aws_iam_role.datasync_to_s3_role]
+  depends_on = [aws_datasync_agent.datasync_agent_tf, aws_iam_role.datasync_to_s3_role]
 }
 
 # Se referencia al arn del bucket
@@ -71,10 +71,10 @@ resource "aws_datasync_location_nfs" "nfs_loc_tf" {
   subdirectory    = "/home/ubuntu/share_local_nfs_tf"
 
   on_prem_config {
-    agent_arns = [aws_datasync_agent.datasync_agent.arn]
+    agent_arns = [aws_datasync_agent.datasync_agent_tf.arn]
   }
 
-  depends_on = [aws_datasync_agent.datasync_agent, aws_instance.server_tf]
+  depends_on = [aws_datasync_agent.datasync_agent_tf, aws_instance.server_tf]
 }
 
 resource "aws_datasync_task" "task" {
