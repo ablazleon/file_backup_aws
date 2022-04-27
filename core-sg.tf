@@ -5,7 +5,7 @@ resource "aws_storagegateway_gateway" "sg_tf" {
   gateway_type       = "FILE_S3"
 
   timeouts {
-    create = "1m"
+    create = "2m"
   }
 
   depends_on = [aws_instance.sg-agent_tf]
