@@ -42,7 +42,7 @@ resource "aws_instance" "ds-agent_tf" {
 
 resource "aws_instance" "sg-agent_tf" {
   ami                         = "ami-008ded4ccf064a9fa"
-  instance_type               = "m5.large"
+  instance_type               = "m5.2xlarge"
   key_name                    = aws_key_pair.server-key.key_name
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.sg.id]
