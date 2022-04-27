@@ -95,7 +95,6 @@ resource "aws_datasync_task" "task" {
     create = "1m"
   }
   depends_on = [aws_datasync_location_s3.core_bucket_loc_tf, aws_datasync_location_nfs.nfs_loc_tf]
-
 }
 
 
