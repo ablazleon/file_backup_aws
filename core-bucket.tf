@@ -5,6 +5,7 @@
 # https://medium.com/interleap/terraform-destroy-replace-buckets-cf9d63d0029d
 resource "aws_s3_bucket" "core_bucket_tf" {
   bucket = "core-bucket-tf"
+  prefix = "migration"
   force_destroy = true
 
   tags = {
