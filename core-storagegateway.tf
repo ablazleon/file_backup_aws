@@ -22,7 +22,7 @@ resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
     create = "1m"
   }
 # Dependencia con la carpeta migration
-  depends_on = [aws_storagegateway_gateway.sg_tf, aws_iam_role.sg_s3_role]
+  depends_on = [aws_storagegateway_gateway.sg_tf, aws_iam_role.sg_s3_role, aws_s3_bucket.core_bucket_tf]
 }
 
 resource "aws_iam_role" "sg_s3_role" {
