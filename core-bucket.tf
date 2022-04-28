@@ -6,10 +6,10 @@
 # Crear un folder
 
 resource "aws_s3_bucket" "core_bucket_tf" {
-  bucket = "core-bucket-tf_new"
+  bucket = "core-bucket-tf-new"
   force_destroy = false
   tags = {
-    Name = "core-bucket-tf_new"
+    Name = "core-bucket-tf-new"
   }
 }
 
