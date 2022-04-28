@@ -21,7 +21,7 @@ resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
   timeouts {
     create = "1m"
   }
-
+# Dependencia con la carpeta migration
   depends_on = [aws_storagegateway_gateway.sg_tf, aws_iam_role.sg_s3_role]
 }
 
