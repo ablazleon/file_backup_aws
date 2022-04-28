@@ -1,8 +1,11 @@
+
+# Updated to v4 and then terraform init -upgrade
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/guides/version-4-upgrade
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 3.27"
+      version = "~> 4.0"
     }
   }
 
