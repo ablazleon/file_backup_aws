@@ -1,8 +1,8 @@
 resource "aws_storagegateway_gateway" "sg_tf" {
-  gateway_ip_address = aws_instance.sg-agent_tf.public_ip
-  gateway_name       = "sg_tf"
-  gateway_timezone   = "GMT+1:00"
-  gateway_type       = "FILE_S3"
+  gateway_ip_address       = aws_instance.sg-agent_tf.public_ip
+  gateway_name             = "sg_tf"
+  gateway_timezone         = "GMT+1:00"
+  gateway_type             = "FILE_S3"
   cloudwatch_log_group_arn = aws_cloudwatch_log_group.log_group_sg_tf.arn
   timeouts {
     create = "4m"
@@ -12,16 +12,16 @@ resource "aws_storagegateway_gateway" "sg_tf" {
 }
 
 resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
-  client_list  = ["0.0.0.0/0"]
-  gateway_arn  = aws_storagegateway_gateway.sg_tf.arn
-  location_arn = "${aws_s3_bucket.core_bucket_tf.arn}/migration/"
-  role_arn     = aws_iam_role.sg_s3_role.arn
+  client_list     = ["0.0.0.0/0"]
+  gateway_arn     = aws_storagegateway_gateway.sg_tf.arn
+  location_arn    = "${aws_s3_bucket.core_bucket_tf.arn}/migration/"
+  role_arn        = aws_iam_role.sg_s3_role.arn
   file_share_name = "nfs_fs_tf"
 
   timeouts {
     create = "1m"
   }
-# Dependencia con la carpeta migration
+  # Dependencia con la carpeta migration
   depends_on = [aws_storagegateway_gateway.sg_tf, aws_iam_role.sg_s3_role, aws_s3_bucket.core_bucket_tf]
 }
 
