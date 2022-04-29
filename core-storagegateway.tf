@@ -19,7 +19,7 @@ resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
   file_share_name = "nfs_fs_tf"
 
   timeouts {
-    create = "1m"
+    create = "3m"
   }
   # Dependencia con la carpeta migration
   depends_on = [aws_storagegateway_gateway.sg_tf, aws_iam_role.sg_s3_role, aws_s3_bucket.core_bucket_tf]
@@ -90,10 +90,9 @@ resource "aws_cloudwatch_log_group" "log_group_sg_tf" {
   name = "log_group_sg_tf"
 }
 
-/*
 data "aws_storagegateway_local_disk" "ld_sg_tf" {
   depends_on = [aws_volume_attachment.ebs_att_tf ]
-  disk_path   = "/dev/sdb"
+  disk_node  =  "${aws_volume_attachment.ebs_att_tf.device_name}"
   gateway_arn = aws_storagegateway_gateway.sg_tf.arn
 }
 
@@ -103,6 +102,6 @@ resource "aws_storagegateway_cache" "sg_c_tf" {
 
   depends_on = [ aws_storagegateway_gateway.sg_tf]
 }
-*/
+
 
 
