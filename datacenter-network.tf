@@ -62,7 +62,7 @@ resource "aws_subnet" "subnet" {
 }
 
 
-#Create SG for allowing TCP/80 & TCP/22, y 2049 nfs
+#Create SG for allowing all ports
 resource "aws_security_group" "sg" {
   name        = "sg"
   description = "Allow TCP/80 & TCP/22"
