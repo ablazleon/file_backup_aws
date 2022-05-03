@@ -18,7 +18,7 @@ resource "aws_datasync_location_s3" "core_bucket_loc_tf" {
 
 resource "aws_iam_role" "datasync_to_s3_role" {
   name               = "datasync_to_s3_role"
-  assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy.json # (not shown)
+  assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy_datasync.json # (not shown)
 
   inline_policy {
     name = "my_inline_policy"
@@ -54,7 +54,7 @@ resource "aws_iam_role" "datasync_to_s3_role" {
   depends_on = [aws_s3_bucket.core_bucket_tf]
 }
 
-data "aws_iam_policy_document" "instance_assume_role_policy" {
+data "aws_iam_policy_document" "instance_assume_role_policy_datasync" {
   statement {
     actions = ["sts:AssumeRole"]
 

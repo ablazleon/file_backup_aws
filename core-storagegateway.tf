@@ -33,7 +33,7 @@ resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
 
 resource "aws_iam_role" "sg_s3_role" {
   name               = "sg_s3_role"
-  assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy.json # (not shown)
+  assume_role_policy = data.aws_iam_policy_document.instance_assume_role_policy_storagegateway.json # (not shown)
 
   inline_policy {
     name = "sg_policy"
@@ -107,6 +107,17 @@ resource "aws_storagegateway_cache" "sg_c_tf" {
   gateway_arn = aws_storagegateway_gateway.sg_tf.arn
 
   depends_on = [aws_storagegateway_gateway.sg_tf]
+}
+
+data "aws_iam_policy_document" "instance_assume_role_policy_storagegateway" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["storagegateway.amazonaws.com"]
+    }
+  }
 }
 
 
