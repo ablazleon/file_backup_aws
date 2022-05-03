@@ -17,6 +17,12 @@ resource "aws_storagegateway_nfs_file_share" "nfs_fs_tf" {
   location_arn    = "${aws_s3_bucket.core_bucket_tf.arn}/migration/"
   role_arn        = aws_iam_role.sg_s3_role.arn
   file_share_name = "nfs_fs_tf"
+  nfs_file_share_defaults {
+    directory_mode = "0777"
+    file_mode      = "0666"
+    group_id       = "65534"
+    owner_id       = "65534"
+  }
 
   timeouts {
     create = "3m"
