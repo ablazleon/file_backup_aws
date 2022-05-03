@@ -4,7 +4,6 @@
 # Forzar la destrucción del bucket
 # https://medium.com/interleap/terraform-destroy-replace-buckets-cf9d63d0029d
 # Crear un folder
-
 resource "aws_s3_bucket" "core_bucket_tf" {
   bucket        = "core-bucket-tf"
   force_destroy = true

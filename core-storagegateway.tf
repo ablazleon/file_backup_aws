@@ -91,8 +91,8 @@ resource "aws_cloudwatch_log_group" "log_group_sg_tf" {
 }
 
 data "aws_storagegateway_local_disk" "ld_sg_tf" {
-  depends_on = [aws_volume_attachment.ebs_att_tf ]
-  disk_node  =  "${aws_volume_attachment.ebs_att_tf.device_name}"
+  depends_on  = [aws_volume_attachment.ebs_att_tf]
+  disk_node   = aws_volume_attachment.ebs_att_tf.device_name
   gateway_arn = aws_storagegateway_gateway.sg_tf.arn
 }
 
@@ -100,7 +100,7 @@ resource "aws_storagegateway_cache" "sg_c_tf" {
   disk_id     = data.aws_storagegateway_local_disk.ld_sg_tf.disk_id
   gateway_arn = aws_storagegateway_gateway.sg_tf.arn
 
-  depends_on = [ aws_storagegateway_gateway.sg_tf]
+  depends_on = [aws_storagegateway_gateway.sg_tf]
 }
 
 
