@@ -15,7 +15,7 @@ on:
 jobs:
   terratest:
     name: Terratest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       # Install Golang (needed by terratest)
       - name: Install Go
