@@ -3,8 +3,8 @@ name: Terratest
 
 on:
   # Uncomment the next two lines to run as CI on every push to the branch "main"
-    push:
-      branches: [ dev ]
+  #  push:
+  #    branches: [ dev ]
   # Uncomment the next line to run as CI on every pull request, on any branch
   #  pull_request:
   # Uncomment the next two lines to run as a "sanity" CI at 0:00 UTC on the first of every month
