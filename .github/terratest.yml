@@ -10,7 +10,7 @@ on:
   # Uncomment the next two lines to run as a "sanity" CI at 0:00 UTC on the first of every month
   #  schedule:
   #    - cron: "0 0 1 * *"
-  workflow_dispatch:
+  # workflow_dispatch:
 
 jobs:
   terratest:
