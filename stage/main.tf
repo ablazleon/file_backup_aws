@@ -32,11 +32,14 @@ module "datacenter" {
 }
 
 module "files_backup" {
+
   source = "../modules/files_backup/"
 
   ebs-device-name = module.datacenter.ebs-device-name
   DS-Agent-Public-IP = module.datacenter.DS-Agent-Public-IP
   NFSServer-Private-IP = module.datacenter.NFSServer-Private-IP
   SG-Agent-Public-IP = module.datacenter.SG-Agent-Public-IP
+
+  depends_on = [ module.datacenter ]
 }
 
