@@ -17,3 +17,10 @@ provider "aws" {
   region  = "eu-west-3"
 }
 
+terraform {
+  backend "s3" {
+    bucket  = "file-backup-aws-tf-estado"
+    region = "eu-west-3"
+    key = "state"
+  }
+}
