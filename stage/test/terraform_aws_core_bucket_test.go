@@ -30,7 +30,7 @@ func TestTerraformAwsS3Example(t *testing.T) {
 	// terraform testing.
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{
 		// The path to where our Terraform code is located
-		TerraformDir: "../modules/terraform-aws-s3-example",
+		TerraformDir: "../modules/",
 
 		// Variables to pass to our Terraform code using -var options
 		Vars: map[string]interface{}{
