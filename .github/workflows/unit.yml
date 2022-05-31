@@ -55,6 +55,9 @@ jobs:
       - name: Terraform validate
         run: terraform validate
         # Run terratest on all test functions starting with "TestIT_".  Restrict to a single process with a 30 minute timeout
+      - name: delete cache
+        working-directory: stage/test
+        run: go clean -modcache
       - name: Download Go Modules
         working-directory: stage/test
         run: go mod download
