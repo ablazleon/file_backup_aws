@@ -11,13 +11,13 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "eu-west-3"
+  region  = "eu-west-1"
 }
 
 terraform {
   backend "s3" {
     bucket  = "file-backup-aws-tf-estado"
-    region = "eu-west-3"
+    region = "eu-west-1"
     key = "state/prod/terraform.state"
   }
 }
