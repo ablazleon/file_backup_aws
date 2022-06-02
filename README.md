@@ -26,5 +26,8 @@ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(l
 sudo apt-get update && sudo apt-get install terraform
 
 git clone https://github.gsissc.myatos.net/A838102/file_backup_aws.git
-
 ```
+
+- A838102
+- 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
+Un token solo de lectura
