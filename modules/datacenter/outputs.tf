@@ -14,6 +14,6 @@ output "NFSServer-Private-IP" {
   value = aws_instance.server_tf.private_ip
 }
 
-output "ebs-device-name" {
+output "disk-device-name" {
   value = aws_volume_attachment.ebs_att_tf.device_name
 }

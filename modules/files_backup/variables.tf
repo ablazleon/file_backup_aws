@@ -1,4 +1,4 @@
-variable "ebs-device-name" {
+variable "disk-device-name" {
   description = "device name of the volume"
   type        = string
   default     = ""
