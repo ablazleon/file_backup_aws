@@ -26,7 +26,7 @@ module "files_backup" {
 
   source = "../modules/files_backup/"
 
-  ebs-device-name = var.disk-device-name
+  disk-device-name = var.disk-device-name
   DS-Agent-Public-IP = var.DS-Agent-Public-IP
   NFSServer-Private-IP = var.NFSServer-Private-IP
   SG-Agent-Public-IP = var.SG-Agent-Public-IP
