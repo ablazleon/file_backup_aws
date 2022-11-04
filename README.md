@@ -2,7 +2,7 @@
 
 En este repo se pracitca con la creación de una arquitectura en aws.
 
-- 1. Se crear un provider-main.tf donde se inicia una isntancia de ejemplo
+- 1. Se crear un provider-main.tf donde se inicia una instancia de ejemplo
 - 2. Se crea un storage gateway
 - 3. Se crea un datasync
 
@@ -25,9 +25,3 @@ curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 sudo apt-get update && sudo apt-get install terraform
 
-git clone https://github.gsissc.myatos.net/A838102/file_backup_aws.git
-```
-
-- A838102
-- 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
-Un token solo de lectura
